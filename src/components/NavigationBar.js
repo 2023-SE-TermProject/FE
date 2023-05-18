@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavbarContainer = styled.nav`
@@ -13,6 +13,8 @@ const NavbarContainer = styled.nav`
 const Logo = styled.span`
   font-weight: bold;
   font-size: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
 `;
 
 const LogoutButton = styled.button`
@@ -23,15 +25,24 @@ const LogoutButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
 `;
+const LogoButton = styled.button`
+  border: none;
+  background: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  cursor: pointer;
+`;
 const NavigationBar = () => {
-  // const history = useHistory();
+  const navigate = useNavigate();
     const handleLogout = () => {
-      // history.push('/login');
+      navigate('/login');
     };
-  
+    const handleLogoClick =()=>{
+      navigate("/");
+    }
     return (
       <NavbarContainer>
-        <Logo>가천대학교</Logo>
+        <LogoButton onClick={handleLogoClick}>가천대학교</LogoButton>
         <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
       </NavbarContainer>
     );

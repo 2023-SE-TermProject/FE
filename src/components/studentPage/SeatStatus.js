@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+const StyledHeading = styled.h3`
+  font-size: 1.5rem;
+  font-weight: bold;
+`;
 
 const SeatStatus = () => {
     const [artechnetData, setArtechnetData] = useState(null);
@@ -27,14 +32,28 @@ const SeatStatus = () => {
       // 데이터가 아직 로딩 중인 경우 로딩 상태를 표시할 수 있습니다.
       return <div>Loading...</div>;
     }
+    if (artechnetData.seatNumber === null){
+      return(
+        <div>
+                <StyledHeading>º 아르테크네</StyledHeading>
+              <div style ={{fontSize : "1.2rem"}}>체크인한 좌석이 없습니다.</div>
+              <br />
+        </div>);
+    }
 
   return (
     <>
-      {artechnetData.id && (
+      {artechnetData.id ? (
+        <div style={{ textAlign: 'center' }}>
+          <StyledHeading>º 아르테크네</StyledHeading>
+          <p style ={{fontSize : "1.2rem"}}>사용중인 좌석: {artechnetData.seatNumber}</p>
+          <p style ={{fontSize : "1.2rem"}}>위치: {artechnetData.floor}</p>
+        </div>
+      ) : (
         <div>
-          <h3>아르테크네</h3>
-          <p>사용중인 좌석: {artechnetData.seatNumber}</p>
-          <p>위치: {artechnetData.floor}</p>
+        <StyledHeading>º 아르테크네</StyledHeading>
+        <div style={{ fontSize: '1.2rem' }}>체크인한 좌석이 없습니다.</div>
+        <br />
         </div>
       )}
     </>

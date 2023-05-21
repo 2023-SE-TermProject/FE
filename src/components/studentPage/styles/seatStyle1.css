@@ -1,0 +1,56 @@
+.itembox {
+    margin-right: 2px;
+    margin-bottom: 2px;
+  }
+  .itembox:nth-of-type(4n+1) {
+    margin-right: 0;
+  }
+  
+  .itembox:nth-of-type(n+5) {
+    clear: left;
+  }
+/* .itembox:nth-of-type(1),
+.itembox:nth-of-type(2),
+.itembox:nth-of-type(3),
+.itembox:nth-of-type(4){
+  margin-bottom: 0;
+}
+
+.itembox:nth-of-type(5),
+.itembox:nth-of-type(6),
+.itembox:nth-of-type(7),
+.itembox:nth-of-type(8),
+.itembox:nth-of-type(9),
+.itembox:nth-of-type(10),
+.itembox:nth-of-type(11),
+.itembox:nth-of-type(12) {
+  margin-right: 0;
+}
+
+.itembox:nth-of-type(13),
+.itembox:nth-of-type(14),
+.itembox:nth-of-type(15),
+.itembox:nth-of-type(16),
+.itembox:nth-of-type(17),
+.itembox:nth-of-type(18) {
+  margin-right: 0;
+}
+
+.itembox:nth-of-type(13),
+.itembox:nth-of-type(14),
+.itembox:nth-of-type(15),
+.itembox:nth-of-type(16),
+.itembox:nth-of-type(17),
+.itembox:nth-of-type(18) {
+  margin-right: 0;
+}
+
+.itembox:nth-of-type(19),
+.itembox:nth-of-type(20),
+.itembox:nth-of-type(21),
+.itembox:nth-of-type(22),
+.itembox:nth-of-type(23),
+.itembox:nth-of-type(24),
+.itembox:nth-of-type(25) {
+  margin-right: 0;
+} */

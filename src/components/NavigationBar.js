@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavbarContainer = styled.nav`
@@ -8,13 +8,6 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   padding: 1rem;
   background-color: #f8f9fa;
-`;
-
-const Logo = styled.span`
-  font-weight: bold;
-  font-size: 1.5rem;
-  cursor: pointer;
-  text-decoration: none;
 `;
 
 const LogoutButton = styled.button`
@@ -38,7 +31,7 @@ const NavigationBar = () => {
       navigate('/login');
     };
     const handleLogoClick =()=>{
-      navigate("/");
+      navigate("/studentpage");
     }
     return (
       <NavbarContainer>

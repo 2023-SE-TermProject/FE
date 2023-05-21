@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+const StyledHeading = styled.h3`
+  font-size: 1.5rem;
+  font-weight: bold;
+`;
 
 const ReservationStatus = () => {
     const [metaData, setMetaData] = useState(null);
@@ -28,12 +33,17 @@ const ReservationStatus = () => {
     }
   return (
     <>
-      {metaData[0] && (
+      {metaData[0] ? (
         <div>
-          <h3>메타버스 회의실</h3>
-          <p>날짜/시간: {metaData[0].startTime} ~ {metaData[0].endTime}</p>
-          <p>회의실: {metaData[0].roomNumber}</p>
+          <StyledHeading>º 메타버스 회의실</StyledHeading>
+          <p style ={{fontSize : "1.2rem"}}>- 날짜/시간: {metaData[0].startTime} ~ {metaData[0].endTime}</p>
+          <p style ={{fontSize : "1.2rem"}}>º회의실: {metaData[0].roomNumber}</p>
         </div>
+      ) : (
+        <div>
+        <StyledHeading>º 메타버스 회의실</StyledHeading>
+        <div style ={{fontSize : "1.2rem"}}>예약 정보가 없습니다.</div>
+      </div>
       )}
     </>
   );

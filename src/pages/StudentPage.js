@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import ArtechneVer1 from "../components/studentPage/artechne_ver1";
 import ArtechneVer2 from "../components/studentPage/artechne_ver2";
+import Reservation from "../components/reservation/Reservation";
 const StyledBox = styled.div`
   text-align: center;
   background-color: white;
@@ -150,6 +151,10 @@ const StudentPage = () => {
           </Container>
         </div>
       </BoxContainer>
+
+      <br />
+      <StyledHeading> 메타버스 회의실 예약 </StyledHeading>
+      <Reservation />
         </>
     )
 

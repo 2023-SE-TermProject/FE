@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components';
-import axios from "axios";
-import { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import axios from "../hooks/axios";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 function LoginAuth (){
     const baseUrl = "http://localhost:8080";
@@ -11,58 +11,52 @@ function LoginAuth (){
     const token = searchParams.get('token');
     const id = searchParams.get('id');
     const navigate = useNavigate();
+
     useEffect(() => {
-        storeToken(token);
-    
+        storeUserInfo(token, id);
+        console.log(role);
+
+        const redirect = () => {
         if (role === 'admin'){
-            UserInfo();
             navigate("/adminpage");
         }
         else if (role === "user"){
-            UserInfo();
-            navigate("/studentpage", { state: { id: id } });
+            navigate("/studentpage");
         }
         else if (role === "guest"){
             const unregisteredStudentID = window.prompt("최초 로그인 입니다. 학번을 입력하세요.");
             if (unregisteredStudentID) {
-                studentId = unregisteredStudentID.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
+                const studentId = unregisteredStudentID.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
+                console.log("입력받은 학번 : " + studentId);
                 insertUser(studentId);
               }
         }
-    }, [role, token,, id]);
-    
-    async function UserInfo(){
-        try {
-            const response = await axios.get(baseUrl + "/member");
-            const { name, studentId} = response.data;
-
-            console.log("이름:", name);
-            console.log("학생 ID:", studentId);
-            
-          } catch (error) {
-            console.error("서버로부터 데이터를 가져오는 데 실패했습니다:", error);
-          }
-    }
+      }
+      redirect();
+    }, []);
 
     async function insertUser(studentId){
         await axios
-            .post(baseUrl + "/api/member",{
+            .patch(baseUrl + "/members/"+id+"/sign-up",{
               studentId : studentId,
             })
             .then((response) => {
-              if (response.data === "True"){
-                UserInfo();
+              if (response.data === true){
                 navigate("/studentpage")
               }
             })   
             .catch((error)=>{
                 console.log(error);
+                navigate("/login")
             })
       }
 
-    const storeToken = (token) => {
-        // 토큰 값을 로컬 스토리지에 저장
+    const storeUserInfo = (token, id) => {
+        // 토큰 값과 id 로컬 스토리지에 저장
         localStorage.setItem('token', token);
+        localStorage.setItem("id", id);
+        console.log(id);
+        console.log(token);
     };
 
 }

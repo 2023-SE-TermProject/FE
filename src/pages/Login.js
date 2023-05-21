@@ -39,7 +39,7 @@ function Login() {
           <Logo> AI공학관 좌석예약 서비스</Logo>
         </LogoContainer>
         <p></p>
-        <Button onClick={() => window.location.href="http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/oauth/redirect"}>구글 로그인</Button>
+        <Button onClick={() => window.location.href="http://localhost:8080/oauth2/authorization/google"}>구글 로그인</Button>
       </Div>
   )
 }

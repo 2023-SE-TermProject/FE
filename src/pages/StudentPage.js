@@ -91,70 +91,80 @@ const StudentPage = () => {
     const [isCheckedIn, setIsCheckedIn] = useState(false);
     const [isToggleOn, setToggleOn] = useState(false);
     const [selectedOption, setSelectedOption] = useState('2층');
+
+    const [isReservationClick, setIsReservationClick] = useState(false);
+
     const handleClick = () => {
-      setIsCheckedIn(!isCheckedIn);
+        setIsCheckedIn(!isCheckedIn);
     };
     const handleOptionClick = (option) => {
-      setSelectedOption(option);
+        setSelectedOption(option);
     };
     const handleToggle = () => {
         setToggleOn(!isToggleOn);
-      };
-  
-    return(
-        <>
-        <NavigationBar />
-        <BoxContainer>
-        <StyledBox>
-          <StyleFont> 
-            <UserInfo />
-          </StyleFont>
-        </StyledBox>
-        </BoxContainer>
-        < br/>
-        <BoxContainer>
-        <ButtonContainer>
-          {/* <div style={{ display: 'flex', alignItems: 'center' }}> */}
-            <StyledHeading>아르테크네 좌석 현황</StyledHeading>
-            <Button onClick={handleToggle} variant="light" className="border border-primary border-2 fw-bold">층 선택</Button>
-            {isToggleOn && (
-            <>
-              <p onClick={() => handleOptionClick('2층')} className={selectedOption === '2층' ? 'selected' : ''}>2층</p>
-              <p onClick={() => handleOptionClick('3층')} className={selectedOption === '3층' ? 'selected' : ''}>3층</p>
-              <p onClick={() => handleOptionClick('4층')} className={selectedOption === '4층' ? 'selected' : ''}>4층</p>
-              <p onClick={() => handleOptionClick('5층')} className={selectedOption === '5층' ? 'selected' : ''}>5층</p>
-              <p onClick={() => handleOptionClick('7층')} className={selectedOption === '7층' ? 'selected' : ''}>7층</p>
-            </>
-            )}
-          <Button variant="light" className="border border-primary border-2 fw-bold" onClick={handleClick}>
-            {isCheckedIn ? '체크아웃' : '체크인'}
-          </Button>
-          {/* </div> */}
-        </ButtonContainer>
-        </BoxContainer>
-        <BoxContainer>
-            <StyledBox>
-            {['2층', '3층'].includes(selectedOption) ? (
-              <ArtechneVer1 option={parseInt(selectedOption)} />
-            ) : (
-              <ArtechneVer2 option={parseInt(selectedOption)}/>
-            )}
-            </StyledBox>
-      </BoxContainer>
-      <BoxContainer>
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Container>
-            <StyledUseBox />
-            <StyledText>이용불가</StyledText>
-            <StyledOpeningBox />
-            <StyledText>이용가능</StyledText>
-          </Container>
-        </div>
-      </BoxContainer>
+    };
 
-      <br />
-      <StyledHeading> 메타버스 회의실 예약 </StyledHeading>
-      <Reservation />
+    const onReservationBtnClick = () => {
+        setIsReservationClick(!isReservationClick);
+    }
+
+    return (
+        <>
+            <NavigationBar />
+            <BoxContainer>
+                <StyledBox>
+                    <StyleFont>
+                        <UserInfo />
+                    </StyleFont>
+                </StyledBox>
+            </BoxContainer>
+            < br />
+            <BoxContainer>
+                <ButtonContainer>
+                    {/* <div style={{ display: 'flex', alignItems: 'center' }}> */}
+                    <StyledHeading>아르테크네 좌석 현황</StyledHeading>
+                    <Button onClick={handleToggle} variant="light" className="border border-primary border-2 fw-bold">층 선택</Button>
+                    {isToggleOn && (
+                        <>
+                            <p onClick={() => handleOptionClick('2층')} className={selectedOption === '2층' ? 'selected' : ''}>2층</p>
+                            <p onClick={() => handleOptionClick('3층')} className={selectedOption === '3층' ? 'selected' : ''}>3층</p>
+                            <p onClick={() => handleOptionClick('4층')} className={selectedOption === '4층' ? 'selected' : ''}>4층</p>
+                            <p onClick={() => handleOptionClick('5층')} className={selectedOption === '5층' ? 'selected' : ''}>5층</p>
+                            <p onClick={() => handleOptionClick('7층')} className={selectedOption === '7층' ? 'selected' : ''}>7층</p>
+                        </>
+                    )}
+                    <Button variant="light" className="border border-primary border-2 fw-bold" onClick={handleClick}>
+                        {isCheckedIn ? '체크아웃' : '체크인'}
+                    </Button>
+                    {/* </div> */}
+                </ButtonContainer>
+            </BoxContainer>
+            <BoxContainer>
+                <StyledBox>
+                    {['2층', '3층'].includes(selectedOption) ? (
+                        <ArtechneVer1 option={parseInt(selectedOption)} />
+                    ) : (
+                        <ArtechneVer2 option={parseInt(selectedOption)} />
+                    )}
+                </StyledBox>
+            </BoxContainer>
+            <BoxContainer>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Container>
+                        <StyledUseBox />
+                        <StyledText>이용불가</StyledText>
+                        <StyledOpeningBox />
+                        <StyledText>이용가능</StyledText>
+                    </Container>
+                </div>
+            </BoxContainer>
+
+            <br />
+            <StyledHeading onClick={onReservationBtnClick}>
+                메타버스 회의실 예약 {isReservationClick ? "▼" : "▲"}
+            </StyledHeading>
+            {isReservationClick && <Reservation />}
+
         </>
     )
 

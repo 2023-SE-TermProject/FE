@@ -43,30 +43,72 @@ const StyledNotice = styled.h3`
 const Container = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 20px;
+  margin-right: 10px;
+  }
 `;
 
 const StyledUseBox = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background-color: gray;
-  border: 1px solid black;
+  border: 0.5px solid black;
+
+  @media (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+    border-width: 1px;
+  }
 `;
 
 const StyledOpeningBox = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background-color: white;
-  border: 1px solid black;
+  border: 0.5px solid black;
+
+  @media (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+    border-width: 1px;
+  }
 `;
+
 const StyledText = styled.div`
+  font-size: 1rem;
+  margin-left: 0.35rem;
+  margin-right: 0.45rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+    margin-left: 0.7rem;
+    margin-right: 0.9rem;
+  }
+`;
+
+
+const MobileContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const MobileStyledBox = styled(StyledBox)`
+  width: 90%;
+`;
+
+const MobileStyledHeading = styled(StyledHeading)`
   font-size: 1.2rem;
-  margin-left: 0.7rem; /* 원하는 간격 설정 */
-  margin-right: 0.9rem;
+`;
+
+const MobileStyledNotice = styled(StyledNotice)`
+  font-size: 0.8rem;
 `;
 const StudentPage = () => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
     const [isCheckedIn, setIsCheckedIn] = useState(false);
     const [selectedOption, setSelectedOption] = useState('2층');
 
@@ -86,73 +128,209 @@ const StudentPage = () => {
 
     return (
         <>
-        <NavigationBar />
-            <BoxContainer>
-                <StyledBox>
-                    <StyledNotice>[공지] 05월 29일 00시~2시(약 2시간) 좌석 예약 서비스 점검</StyledNotice>
-                </StyledBox>
-            </BoxContainer>
-            < br />
-            <BoxContainer>
-                <StyledBox>
-                    <StyleFont>
-                        <UserInfo />
-                    </StyleFont>
-                </StyledBox>
-            </BoxContainer>
-            < br />
-            <BoxContainer>
-                <StyledHeading>아르테크네 좌석 현황 ▼</StyledHeading>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 400}}>
-                    <Form.Select value={selectedOption} onChange={handleOptionChange}>
-                        <option value="">층 선택</option>
-                        <option value="2층">2층</option>
-                        <option value="3층">3층</option>
-                        <option value="4층">4층</option>
-                        <option value="5층">5층</option>
-                        <option value="7층">7층</option>
-                    </Form.Select>
-                    <Button
-                    variant="light"
-                    className="border border-primary border-2 fw-bold"
-                    onClick={handleClick}
-                    >
-                    <span style={{ whiteSpace: 'nowrap' }}>
-                        {isCheckedIn ? '체크아웃' : '체크인'}
-                    </span>
-                    </Button>
-                </div>
-            </BoxContainer>
-            <BoxContainer>
-                <StyledBox>
-                    {['2층', '3층'].includes(selectedOption) ? (
-                        <ArtechneVer1 option={parseInt(selectedOption)} />
-                    ) : (
-                        <ArtechneVer2 option={parseInt(selectedOption)} />
-                    )}
-                </StyledBox>
-            </BoxContainer>
-            <BoxContainer>
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Container>
-                        <StyledUseBox />
-                        <StyledText>이용불가</StyledText>
-                        <StyledOpeningBox />
-                        <StyledText>이용가능</StyledText>
-                    </Container>
-                </div>
-            </BoxContainer>
-            <br />
-            <BoxContainer>
-                <StyledHeading onClick={onReservationBtnClick}>
-                    메타버스 회의실 예약 ▼ 
-                </StyledHeading>
-                <StyledBox>
-                    <Reservation />
-                </StyledBox>
-            </BoxContainer>
-
+        <MobileContainer>
+        <MobileStyledBox>
+            <MobileStyledNotice>[공지] 05월 29일 00시~2시(약 2시간) 좌석 예약 서비스 점검</MobileStyledNotice>
+        </MobileStyledBox>
+        </MobileContainer>
+        <br />
+        <MobileContainer>
+        <MobileStyledBox>
+            <StyleFont>
+            <UserInfo />
+            </StyleFont>
+        </MobileStyledBox>
+        </MobileContainer>
+        <br />
+        <MobileContainer>
+        <MobileStyledHeading>아르테크네 좌석 현황 ▼</MobileStyledHeading>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 200}}>
+            <Form.Select value={selectedOption} onChange={handleOptionChange}>
+            <option value="">층 선택</option>
+            <option value="2층">2층</option>
+            <option value="3층">3층</option>
+            <option value="4층">4층</option>
+            <option value="5층">5층</option>
+            <option value="7층">7층</option>
+            </Form.Select>
+            <Button
+            variant="light"
+            className="border border-primary border-2 fw-bold"
+            onClick={handleClick}
+            >
+            <span style={{ whiteSpace: 'nowrap' }}>
+                {isCheckedIn ? '체크아웃' : '체크인'}
+            </span>
+            </Button>
+        </div>
+        </MobileContainer>
+        <MobileContainer>
+        <MobileStyledBox>
+            {['2층', '3층'].includes(selectedOption) ? (
+            <ArtechneVer1 option={parseInt(selectedOption)} />
+            ) : (
+            <ArtechneVer2 option={parseInt(selectedOption)} />
+            )}
+        </MobileStyledBox>
+        </MobileContainer>
+        <MobileContainer>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Container>
+            <StyledUseBox />
+            <StyledText>이용불가</StyledText>
+            <StyledOpeningBox />
+            <StyledText>이용가능</StyledText>
+            </Container>
+        </div>
+        </MobileContainer>
+        <br />
+        <MobileContainer>
+        <MobileStyledHeading onClick={onReservationBtnClick}>
+            메타버스 회의실 예약 ▼
+        </MobileStyledHeading>
+        <MobileStyledBox>
+            <Reservation />
+        </MobileStyledBox>
+        </MobileContainer>
         </>
+    //     <>
+    //     <NavigationBar />
+    //    {isMobile ? (
+    //     <>
+    //     <MobileContainer>
+    //     <MobileStyledBox>
+    //         <MobileStyledNotice>[공지] 05월 29일 00시~2시(약 2시간) 좌석 예약 서비스 점검</MobileStyledNotice>
+    //     </MobileStyledBox>
+    //     </MobileContainer>
+    //     <br />
+    //     <MobileContainer>
+    //     <MobileStyledBox>
+    //         <StyleFont>
+    //         <UserInfo />
+    //         </StyleFont>
+    //     </MobileStyledBox>
+    //     </MobileContainer>
+    //     <br />
+    //     <MobileContainer>
+    //     <MobileStyledHeading>아르테크네 좌석 현황 ▼</MobileStyledHeading>
+    //     <div style={{ display: 'flex', alignItems: 'center', gap: 200}}>
+    //         <Form.Select value={selectedOption} onChange={handleOptionChange}>
+    //         <option value="">층 선택</option>
+    //         <option value="2층">2층</option>
+    //         <option value="3층">3층</option>
+    //         <option value="4층">4층</option>
+    //         <option value="5층">5층</option>
+    //         <option value="7층">7층</option>
+    //         </Form.Select>
+    //         <Button
+    //         variant="light"
+    //         className="border border-primary border-2 fw-bold"
+    //         onClick={handleClick}
+    //         >
+    //         <span style={{ whiteSpace: 'nowrap' }}>
+    //             {isCheckedIn ? '체크아웃' : '체크인'}
+    //         </span>
+    //         </Button>
+    //     </div>
+    //     </MobileContainer>
+    //     <MobileContainer>
+    //     <MobileStyledBox>
+    //         {['2층', '3층'].includes(selectedOption) ? (
+    //         <ArtechneVer1 option={parseInt(selectedOption)} />
+    //         ) : (
+    //         <ArtechneVer2 option={parseInt(selectedOption)} />
+    //         )}
+    //     </MobileStyledBox>
+    //     </MobileContainer>
+    //     <MobileContainer>
+    //     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+    //         <Container>
+    //         <StyledUseBox />
+    //         <StyledText>이용불가</StyledText>
+    //         <StyledOpeningBox />
+    //         <StyledText>이용가능</StyledText>
+    //         </Container>
+    //     </div>
+    //     </MobileContainer>
+    //     <br />
+    //     <MobileContainer>
+    //     <MobileStyledHeading onClick={onReservationBtnClick}>
+    //         메타버스 회의실 예약 ▼
+    //     </MobileStyledHeading>
+    //     <MobileStyledBox>
+    //         <Reservation />
+    //     </MobileStyledBox>
+    //     </MobileContainer>
+    //     </>) : (
+    //     <>
+    //     <BoxContainer>
+    //             <StyledBox>
+    //                 <StyledNotice>[공지] 05월 29일 00시~2시(약 2시간) 좌석 예약 서비스 점검</StyledNotice>
+    //             </StyledBox>
+    //         </BoxContainer>
+    //         < br />
+    //         <BoxContainer>
+    //             <StyledBox>
+    //                 <StyleFont>
+    //                     <UserInfo />
+    //                 </StyleFont>
+    //             </StyledBox>
+    //         </BoxContainer>
+    //         < br />
+    //         <BoxContainer>
+    //             <StyledHeading>아르테크네 좌석 현황 ▼</StyledHeading>
+    //             <div style={{ display: 'flex', alignItems: 'center', gap: 400}}>
+    //                 <Form.Select value={selectedOption} onChange={handleOptionChange}>
+    //                     <option value="">층 선택</option>
+    //                     <option value="2층">2층</option>
+    //                     <option value="3층">3층</option>
+    //                     <option value="4층">4층</option>
+    //                     <option value="5층">5층</option>
+    //                     <option value="7층">7층</option>
+    //                 </Form.Select>
+    //                 <Button
+    //                 variant="light"
+    //                 className="border border-primary border-2 fw-bold"
+    //                 onClick={handleClick}
+    //                 >
+    //                 <span style={{ whiteSpace: 'nowrap' }}>
+    //                     {isCheckedIn ? '체크아웃' : '체크인'}
+    //                 </span>
+    //                 </Button>
+    //             </div>
+    //         </BoxContainer>
+    //         <BoxContainer>
+    //             <StyledBox>
+    //                 {['2층', '3층'].includes(selectedOption) ? (
+    //                     <ArtechneVer1 option={parseInt(selectedOption)} />
+    //                 ) : (
+    //                     <ArtechneVer2 option={parseInt(selectedOption)} />
+    //                 )}
+    //             </StyledBox>
+    //         </BoxContainer>
+    //         <BoxContainer>
+    //             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+    //                 <Container>
+    //                     <StyledUseBox />
+    //                     <StyledText>이용불가</StyledText>
+    //                     <StyledOpeningBox />
+    //                     <StyledText>이용가능</StyledText>
+    //                 </Container>
+    //             </div>
+    //         </BoxContainer>
+    //         <br />
+    //         <BoxContainer>
+    //             <StyledHeading onClick={onReservationBtnClick}>
+    //                 메타버스 회의실 예약 ▼ 
+    //             </StyledHeading>
+    //             <StyledBox>
+    //                 <Reservation />
+    //             </StyledBox>
+    //         </BoxContainer> 
+    //         </>
+    //     )}
+    //     </>
+
     )
 
 }

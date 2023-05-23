@@ -119,13 +119,23 @@ const ReservationList = ({ date, roomId }) => {
 }
 
 const TimeBlockContainer = styled.div`
-  display: flex
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  @media (min-width: 768px) {
+    gap: 20px;
+  }
 `;
 
 const SubmitButtonContainer = styled.div`
-    text-align: center,
-    display: flex,
-    width: 100vw
+  text-align: center;
+  display: flex;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 100vw;
+  }
 `;
 
 export default ReservationList;

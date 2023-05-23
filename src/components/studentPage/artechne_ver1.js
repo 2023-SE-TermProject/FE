@@ -8,7 +8,7 @@ const ArtechneVer1 = ({ option }) => {
   useEffect(() => {
     const fetchSeatStatus = async () => {
       try {
-        const response = await axios.get(`/api/seat-status/${option}`);
+        const response = await axios.get(`/seats/${option}`);
         setSeatStatus(response.data);
       } catch (error) {
         console.error(error);
@@ -25,12 +25,12 @@ const ArtechneVer1 = ({ option }) => {
       {seatStatus.map((status, index) => (
         <div
           key={index}
-          className={`itembox ${index}`}
+          className={`itembox ${status.seatNumber}`}
           style={{
-            width: '50px',
-            height: '50px',
-            backgroundColor: status === 'reserved' ? 'gray' : 'white',
-            margin: '5px',
+            width: '10vw',
+            height: '10vw',
+            backgroundColor: status.isUsed ? 'gray' : 'white',
+            margin: '1vw',
             border: '1px solid black',
           }}
         ></div>

@@ -30,6 +30,7 @@ const ReservationList = ({ date, roomId }) => {
                 // API 요청이 성공하면 받아온 데이터를 상태에 저장
                 console.log(response.data);
                 setReservationTimeList(response.data);
+                console.log("time list : ");
                 console.log(reservationTimeList);
             })
             .catch(error => {
@@ -74,7 +75,7 @@ const ReservationList = ({ date, roomId }) => {
 
     return (
         <>
-            예약 시작 가능 시간
+            <b>예약 시작 가능 시간</b>            
             {reservationTimeList &&
                 <TimeBlockContainer>
                     {reservationTimeList.map((reservationTime) => (
@@ -84,9 +85,13 @@ const ReservationList = ({ date, roomId }) => {
                             isActive={reservationTime[0] === activeTime}
                         />
                     ))}
-                </TimeBlockContainer>
-            }
-            예약 시간
+                </TimeBlockContainer>}
+            {reservationTimeList && !reservationTimeList.length && 
+            <i>예약 가능 시간이 없습니다.</i> }
+
+            <br/>
+            <br/>
+            <b>예약 시간</b>
             {reservationTimeRangeList &&
                 <TimeBlockContainer>
                     {reservationTimeRangeList.map((reservationTimeRange) => (

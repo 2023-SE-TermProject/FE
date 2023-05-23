@@ -1,11 +1,12 @@
 import NavigationBar from "../components/NavigationBar";
 import UserInfo from "../components/studentPage/UserInfo";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import { Button, Form } from 'react-bootstrap';
 import ArtechneVer1 from "../components/studentPage/artechne_ver1";
 import ArtechneVer2 from "../components/studentPage/artechne_ver2";
 import Reservation from "../components/reservation/Reservation";
+import {Html5QrcodeScanner} from "html5-qrcode";
 const StyledBox = styled.div`
   text-align: center;
   background-color: white;
@@ -46,7 +47,6 @@ const Container = styled.div`
   margin-right: 10px;
   }
 `;
-
 const StyledUseBox = styled.div`
   width: 10px;
   height: 10px;
@@ -110,7 +110,7 @@ const StudentPage = () => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     const [isCheckedIn, setIsCheckedIn] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('2층');
+    const [selectedOption, setSelectedOption] = useState('2');
 
     const [isReservationClick, setIsReservationClick] = useState(false);
 
@@ -118,21 +118,53 @@ const StudentPage = () => {
       setSelectedOption(event.target.value);
       // 선택된 옵션에 대한 추가적인 처리 수행
     };
+
+
     const handleClick = () => {
+      //체크인 버튼
+        setScanResult();
         setIsCheckedIn(!isCheckedIn);
     };
 
     const onReservationBtnClick = () => {
-        setIsReservationClick(!isReservationClick);
+      setIsReservationClick(!isReservationClick);
+  }
+  
+  //qrcode 부분
+  const [scanResult, setScanResult] = useState(null);
+
+  useEffect(() => {
+    const scanner = new Html5QrcodeScanner('reader',{
+      qrbox: {
+        width:250,
+        height: 250,
+      },
+      fps: 5,
+    });
+  
+    scanner.render(success, error);
+    //qr코드 감지했을 때
+    function success(result){
+      
+      scanner.clear();
+      setScanResult(result);
     }
+  
+    function error(err){
+      console.warn(err);
+    }
+  },[]);
+  //qr코드 부분 끝
 
     return (
         <>
+
         <NavigationBar />
         <MobileContainer>
         <MobileStyledBox>
             <MobileStyledNotice>[공지] 05월 29일 00시~2시(약 2시간) 좌석 예약 서비스 점검</MobileStyledNotice>
         </MobileStyledBox>
+        
         </MobileContainer>
         <br />
         <MobileContainer>
@@ -148,33 +180,43 @@ const StudentPage = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: 200}}>
             <Form.Select value={selectedOption} onChange={handleOptionChange}>
             <option value="">층 선택</option>
-            <option value="2층">2층</option>
-            <option value="3층">3층</option>
-            <option value="4층">4층</option>
-            <option value="5층">5층</option>
-            <option value="7층">7층</option>
+            <option value="2">2층</option>
+            <option value="3">3층</option>
+            <option value="4">4층</option>
+            <option value="5">5층</option>
+            <option value="7">7층</option>
             </Form.Select>
             <Button
-            variant="light"
-            className="border border-primary border-2 fw-bold"
-            onClick={handleClick}
-            >
-            <span style={{ whiteSpace: 'nowrap' }}>
-                {isCheckedIn ? '체크아웃' : '체크인'}
-            </span>
-            </Button>
+        variant="light"
+        className="border border-primary border-2 fw-bold"
+        onClick={handleClick}
+        >
+        <span style={{ whiteSpace: 'nowrap' }}>
+            {isCheckedIn ? '체크아웃' : '체크인'}
+        </span>
+        </Button>
         </div>
         </MobileContainer>
         <MobileContainer>
+
         <MobileStyledBox>
+          {/* qrcode reader */}
+        <div>
+          {scanResult
+          ? <div>Success: <a>{scanResult}</a></div>
+          : <div id="reader"></div>
+          }
+        </div>
             {['2층', '3층'].includes(selectedOption) ? (
             <ArtechneVer1 option={parseInt(selectedOption)} />
             ) : (
             <ArtechneVer2 option={parseInt(selectedOption)} />
             )}
+            
         </MobileStyledBox>
         </MobileContainer>
         <MobileContainer>
+          
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Container>
             <StyledUseBox />
@@ -194,6 +236,7 @@ const StudentPage = () => {
         </MobileStyledBox>
         </MobileContainer>
         </>
+        
     //     <>
     //     <NavigationBar />
     //    {isMobile ? (

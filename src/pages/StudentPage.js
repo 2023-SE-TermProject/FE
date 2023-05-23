@@ -128,6 +128,7 @@ const StudentPage = () => {
 
     return (
         <>
+        <NavigationBar />
         <MobileContainer>
         <MobileStyledBox>
             <MobileStyledNotice>[공지] 05월 29일 00시~2시(약 2시간) 좌석 예약 서비스 점검</MobileStyledNotice>

@@ -2,7 +2,7 @@ import NavigationBar from "../components/NavigationBar";
 import UserInfo from "../components/studentPage/UserInfo";
 import React, { useState } from "react";
 import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import ArtechneVer1 from "../components/studentPage/artechne_ver1";
 import ArtechneVer2 from "../components/studentPage/artechne_ver2";
 import Reservation from "../components/reservation/Reservation";
@@ -30,13 +30,13 @@ const BoxContainer = styled.div`
   cursor: pointer;
   margin: 0 auto; /* 수평 가운데 정렬 */
 `;
-const ButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 450px;
-`;
 const StyledHeading = styled.h3`
   font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 20px;
+`;
+const StyledNotice = styled.h3`
+  font-size: 1rem;
   font-weight: bold;
   margin-right: 20px;
 `;
@@ -86,7 +86,13 @@ const StudentPage = () => {
 
     return (
         <>
-            <NavigationBar />
+        <NavigationBar />
+            <BoxContainer>
+                <StyledBox>
+                    <StyledNotice>[공지] 05월 29일 00시~2시(약 2시간) 좌석 예약 서비스 점검</StyledNotice>
+                </StyledBox>
+            </BoxContainer>
+            < br />
             <BoxContainer>
                 <StyledBox>
                     <StyleFont>
@@ -97,21 +103,25 @@ const StudentPage = () => {
             < br />
             <BoxContainer>
                 <StyledHeading>아르테크네 좌석 현황 ▼</StyledHeading>
-                <ButtonContainer>
-                    {/* <div style={{ display: 'flex', alignItems: 'center' }}> */}
-                    <select value={selectedOption} onChange={handleOptionChange}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 400}}>
+                    <Form.Select value={selectedOption} onChange={handleOptionChange}>
                         <option value="">층 선택</option>
                         <option value="2층">2층</option>
                         <option value="3층">3층</option>
                         <option value="4층">4층</option>
                         <option value="5층">5층</option>
                         <option value="7층">7층</option>
-                    </select>
-                    <Button variant="light" className="border border-primary border-2 fw-bold" onClick={handleClick}>
+                    </Form.Select>
+                    <Button
+                    variant="light"
+                    className="border border-primary border-2 fw-bold"
+                    onClick={handleClick}
+                    >
+                    <span style={{ whiteSpace: 'nowrap' }}>
                         {isCheckedIn ? '체크아웃' : '체크인'}
+                    </span>
                     </Button>
-                    {/* </div> */}
-                </ButtonContainer>
+                </div>
             </BoxContainer>
             <BoxContainer>
                 <StyledBox>

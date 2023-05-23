@@ -29,7 +29,7 @@ const ArtechneVer1 = ({ option }) => {
           style={{
             width: '50px',
             height: '50px',
-            backgroundColor: status === 'use' ? 'gray' : 'white',
+            backgroundColor: status === 'reserved' ? 'gray' : 'white',
             margin: '5px',
             border: '1px solid black',
           }}

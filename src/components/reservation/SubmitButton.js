@@ -11,7 +11,7 @@ const SubmitButton = ({roomId, start, end}) => {
         console.log("startTime : " + start);
         console.log("endTime : " + end);
 
-        const submitUrl = `http://localhost:8080/reservations`
+        const submitUrl = `/reservations`
 
         // API 요청 보내기
         axios.post(submitUrl, {

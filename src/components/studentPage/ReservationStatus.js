@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import moment from 'moment/moment';
+
 const StyledHeading = styled.h3`
   font-size: 1.5rem;
   font-weight: bold;
@@ -36,7 +38,7 @@ const ReservationStatus = () => {
       {metaData[0] ? (
         <div>
           <StyledHeading>º 메타버스 회의실</StyledHeading>
-          <p style ={{fontSize : "1.2rem"}}>- 날짜/시간: {metaData[0].startTime} ~ {metaData[0].endTime}</p>
+          <p style ={{fontSize : "1.2rem"}}>- 날짜/시간: {moment(metaData[0].startTime).format('YYYY-MM-DD/HH:mm')} ~ {moment(metaData[0].endTime).format('YYYY-MM-DD/HH:mm')}</p>
           <p style ={{fontSize : "1.2rem"}}>º회의실: {metaData[0].roomNumber}</p>
         </div>
       ) : (

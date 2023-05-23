@@ -31,6 +31,7 @@ const ArtechneVer1 = ({ option }) => {
             height: '50px',
             backgroundColor: status === 'use' ? 'gray' : 'white',
             margin: '5px',
+            border: '1px solid black',
           }}
         ></div>
       ))}

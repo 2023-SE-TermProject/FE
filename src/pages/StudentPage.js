@@ -31,26 +31,9 @@ const BoxContainer = styled.div`
   margin: 0 auto; /* 수평 가운데 정렬 */
 `;
 const ButtonContainer = styled.div`
-  width: 80%;
-  cursor: pointer;
   display: flex;
   align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto; /* 수평 가운데 정렬 */
-  margin-left: 5px; /* 왼쪽으로 10px 이동 */
-  margin-bottom : 5px;
-`;
-const OptionContainer = styled.div`
-  width: 80%;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto; /* 수평 가운데 정렬 */
-  margin-left: 5px; /* 왼쪽으로 10px 이동 */
-  margin-bottom : 5px;
+  gap: 450px;
 `;
 const StyledHeading = styled.h3`
   font-size: 1.5rem;
@@ -64,44 +47,37 @@ const Container = styled.div`
 `;
 
 const StyledUseBox = styled.div`
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  background-color: rgba(0, 0, 0, 0.2);
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border-width: 2px;
-  border-color: #000000; /* 변경 */
+  background-color: gray;
+  border: 1px solid black;
 `;
+
 const StyledOpeningBox = styled.div`
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: bold;
-  width: 1rem;
-  height: 1rem;
-  background-color: #FFFFFF; /* 변경 */
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border-width: 2px;
-  border-color: #000000; /* 변경 */
+  background-color: white;
+  border: 1px solid black;
 `;
 const StyledText = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-left: 0.7rem; /* 원하는 간격 설정 */
+  margin-right: 0.9rem;
 `;
 const StudentPage = () => {
     const [isCheckedIn, setIsCheckedIn] = useState(false);
-    const [isToggleOn, setToggleOn] = useState(false);
     const [selectedOption, setSelectedOption] = useState('2층');
 
     const [isReservationClick, setIsReservationClick] = useState(false);
 
+    const handleOptionChange = (event) => {
+      setSelectedOption(event.target.value);
+      // 선택된 옵션에 대한 추가적인 처리 수행
+    };
     const handleClick = () => {
         setIsCheckedIn(!isCheckedIn);
-    };
-    const handleOptionClick = (option) => {
-        setSelectedOption(option);
-    };
-    const handleToggle = () => {
-        setToggleOn(!isToggleOn);
     };
 
     const onReservationBtnClick = () => {
@@ -120,19 +96,17 @@ const StudentPage = () => {
             </BoxContainer>
             < br />
             <BoxContainer>
+                <StyledHeading>아르테크네 좌석 현황 ▼</StyledHeading>
                 <ButtonContainer>
                     {/* <div style={{ display: 'flex', alignItems: 'center' }}> */}
-                    <StyledHeading>아르테크네 좌석 현황</StyledHeading>
-                    <Button onClick={handleToggle} variant="light" className="border border-primary border-2 fw-bold">층 선택</Button>
-                    {isToggleOn && (
-                        <>
-                            <p onClick={() => handleOptionClick('2층')} className={selectedOption === '2층' ? 'selected' : ''}>2층</p>
-                            <p onClick={() => handleOptionClick('3층')} className={selectedOption === '3층' ? 'selected' : ''}>3층</p>
-                            <p onClick={() => handleOptionClick('4층')} className={selectedOption === '4층' ? 'selected' : ''}>4층</p>
-                            <p onClick={() => handleOptionClick('5층')} className={selectedOption === '5층' ? 'selected' : ''}>5층</p>
-                            <p onClick={() => handleOptionClick('7층')} className={selectedOption === '7층' ? 'selected' : ''}>7층</p>
-                        </>
-                    )}
+                    <select value={selectedOption} onChange={handleOptionChange}>
+                        <option value="">층 선택</option>
+                        <option value="2층">2층</option>
+                        <option value="3층">3층</option>
+                        <option value="4층">4층</option>
+                        <option value="5층">5층</option>
+                        <option value="7층">7층</option>
+                    </select>
                     <Button variant="light" className="border border-primary border-2 fw-bold" onClick={handleClick}>
                         {isCheckedIn ? '체크아웃' : '체크인'}
                     </Button>
@@ -158,12 +132,15 @@ const StudentPage = () => {
                     </Container>
                 </div>
             </BoxContainer>
-
             <br />
-            <StyledHeading onClick={onReservationBtnClick}>
-                메타버스 회의실 예약 {isReservationClick ? "▼" : "▲"}
-            </StyledHeading>
-            {isReservationClick && <Reservation />}
+            <BoxContainer>
+                <StyledHeading onClick={onReservationBtnClick}>
+                    메타버스 회의실 예약 ▼ 
+                </StyledHeading>
+                <StyledBox>
+                    <Reservation />
+                </StyledBox>
+            </BoxContainer>
 
         </>
     )

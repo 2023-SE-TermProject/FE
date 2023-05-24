@@ -47,6 +47,8 @@ const ArtechneVer1 = ({ option }) => {
 
 const SeatStatusContainer = styled.div`
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export default ArtechneVer1;

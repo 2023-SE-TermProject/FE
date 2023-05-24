@@ -110,7 +110,7 @@ const StudentPage = () => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     const [isCheckedIn, setIsCheckedIn] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('2층');
+    const [selectedOption, setSelectedOption] = useState(2);
 
     const [isReservationClick, setIsReservationClick] = useState(false);
 
@@ -148,11 +148,11 @@ const StudentPage = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: 200}}>
             <Form.Select value={selectedOption} onChange={handleOptionChange}>
             <option value="">층 선택</option>
-            <option value="2층">2층</option>
-            <option value="3층">3층</option>
-            <option value="4층">4층</option>
-            <option value="5층">5층</option>
-            <option value="7층">7층</option>
+            <option value="2">2층</option>
+            <option value="3">3층</option>
+            <option value="4">4층</option>
+            <option value="5">5층</option>
+            <option value="7">7층</option>
             </Form.Select>
             <Button
             variant="light"

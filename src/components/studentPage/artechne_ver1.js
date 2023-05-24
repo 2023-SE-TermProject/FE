@@ -22,7 +22,10 @@ const ArtechneVer1 = ({ option }) => {
   return (
     <div>
       {/* 바로 아래 코드는 임시로 넣어놨습니다. */}
-      <div>{option}</div>
+      <div>
+        <b>{option}층</b>
+      </div>
+      <SeatStatusContainer>
       {seatStatus && seatStatus.map((status, index) => (
         <div
           key={index}
@@ -36,8 +39,13 @@ const ArtechneVer1 = ({ option }) => {
           }}
         ></div>
       ))}
+      </SeatStatusContainer>
     </div>
   );
-}  
+}
+
+const SeatStatusContainer = styled.div`
+  display: flex;
+`;
 
 export default ArtechneVer1;

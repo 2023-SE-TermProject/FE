@@ -14,7 +14,7 @@ const ReservationStatus = () => {
 
     useEffect(() => {
       // 백엔드 API 엔드포인트
-      const metabusUrl = `/members/${id}/reservation`;
+      const metabusUrl = `http://gcu-metaverse.shop:8080/members/${id}/reservation`;
 
       // API 요청 보내기
       axios.get(metabusUrl)

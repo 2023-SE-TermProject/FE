@@ -38,7 +38,7 @@ const ReservationStatus = () => {
       {metaData[0] ? (
         <div>
           <StyledHeading>º 메타버스 회의실</StyledHeading>
-          <p style ={{fontSize : "1.2rem"}}>- 날짜/시간: {moment(metaData[0].startTime).format('YYYY-MM-DD/HH:mm')} ~ {moment(metaData[0].endTime).format('YYYY-MM-DD/HH:mm')}</p>
+          <p style ={{fontSize : "1.2rem"}}>- 날짜/시간: {moment(metaData[0].startTime).subtract(1, "months").format('YYYY-MM-DD/HH:mm')} ~ {moment(metaData[0].endTime).subtract(1, "months").format('YYYY-MM-DD/HH:mm')}</p>
           <p style ={{fontSize : "1.2rem"}}>º회의실: {metaData[0].roomNumber}</p>
         </div>
       ) : (

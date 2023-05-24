@@ -16,7 +16,7 @@ const ArtechneVer2 = ({ option }) => {
     };
 
     fetchSeatStatus();
-  }, []);
+  }, [option]);
 
   return (
     <div>

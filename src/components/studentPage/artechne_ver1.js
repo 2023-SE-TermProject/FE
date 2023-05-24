@@ -27,28 +27,35 @@ const ArtechneVer1 = ({ option }) => {
         <b>{option}층</b>
       </div>
       <SeatStatusContainer>
-      {seatStatus && seatStatus.map((status, index) => (
-        <div
-          key={index}
-          className={`itembox ${status.seatNumber}`}
-          style={{
-            width: '10vw',
-            height: '10vw',
-            backgroundColor: status.isUsed ? 'gray' : 'white',
-            margin: '1vw',
-            border: '1px solid black',
-          }}
-        ></div>
-      ))}
+        {seatStatus &&
+          seatStatus.map((status, index) => (
+            <div
+              key={index}
+              className={`itembox ${status.seatNumber}`}
+              style={{
+                width: '10vw',
+                height: '10vw',
+                backgroundColor: status.isUsed ? 'gray' : 'white',
+                margin: '1vw',
+                border: '1px solid black',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: '1vw',
+                gridColumn: `span 1`,
+                color: 'black',
+              }}
+            >
+              {index + 1}
+            </div>
+          ))}
       </SeatStatusContainer>
     </div>
   );
-}
-
-const SeatStatusContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
-
+            }
+  const SeatStatusContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10vw, 1fr));
+    gap: 1vw;
+  `;
 export default ArtechneVer1;

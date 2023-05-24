@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
+
 const Div = styled.div`
 
 margin: 1em;
@@ -31,16 +32,20 @@ const LogoImage = styled.img`
 `;
 
 function Login() {
+
   return (
-      <Div margin-left="10px">
-        <br></br>
-        <LogoImage src="/gachon_logo.jpg" alt="Logo" />
-        <LogoContainer>
-          <Logo> AI공학관 좌석예약 서비스</Logo>
-        </LogoContainer>
-        <p></p>
-        <Button onClick={() => window.location.href="http://localhost:8080/oauth2/authorization/google"}>구글 로그인</Button>
-      </Div>
+    <Div margin-left="10px">
+      <br></br>
+      <LogoImage src="/gachon_logo.jpg" alt="Logo" />
+      <LogoContainer>
+        <Logo> AI공학관 좌석예약 서비스</Logo>
+      </LogoContainer>
+      <p></p>
+      <Button onClick={() => 
+        window.location.href = "http://3.36.28.64:8080/oauth2/authorization/google" // 배포 환경
+        //window.location.href = "http://localhost:8080/oauth2/authorization/google" // 로컬 환경
+        }>구글 로그인</Button>
+    </Div>
   )
 }
 

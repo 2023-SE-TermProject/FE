@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 function LoginAuth (){
-    const baseUrl = "http://localhost:8080";
     const [searchParams, setSearchParams]= useSearchParams();
     const role = searchParams.get('role');
     const token = searchParams.get('token');
@@ -37,7 +36,7 @@ function LoginAuth (){
 
     async function insertUser(studentId){
         await axios
-            .patch(baseUrl + "/members/"+id+"/sign-up",{
+            .patch("/members/"+id+"/sign-up",{
               studentId : studentId,
             })
             .then((response) => {

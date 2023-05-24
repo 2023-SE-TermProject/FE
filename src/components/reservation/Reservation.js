@@ -12,7 +12,7 @@ const Reservation = () => {
   const [selectRoom, setSelectRoom] = useState(null);
 
   useEffect(() => {
-    const requestUrl = `http://localhost:8080/reservations/room-list`;
+    const requestUrl = `/reservations/room-list`;
 
     // API 요청 보내기
     axios.get(requestUrl)

@@ -42,8 +42,8 @@ function Login() {
       </LogoContainer>
       <p></p>
       <Button onClick={() => 
-        // window.location.href = "http://gcu-metaverse.shop:8080/oauth2/authorization/google" // 배포 환경
-        window.location.href = "http://localhost:8080/oauth2/authorization/google" // 로컬 환경
+        window.location.href = "http://gcu-metaverse.shop:8080/oauth2/authorization/google" // 배포 환경
+        // window.location.href = "http://localhost:8080/oauth2/authorization/google" // 로컬 환경
         }>구글 로그인</Button>
     </Div>
   )

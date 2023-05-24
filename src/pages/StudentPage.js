@@ -289,7 +289,7 @@ const StudentPage = () => {
           <MobileContainer>
             <MobileStyledBox>
               <div>
-                {scanResult
+                {scanData
                   ? <div></div>
                   : <div id="reader"></div>
                 }
@@ -360,6 +360,12 @@ const StudentPage = () => {
           </BoxContainer>
           <BoxContainer>
             <StyledBox>
+              <div>
+                {scanData
+                  ? <div></div>
+                  : <div id="reader"></div>
+                }
+              </div>
               {['3층', "4층", "5층", "7층"].includes(selectedOption) ? (
                 <ArtechneVer1 option={parseInt(selectedOption)} />
               ) : (

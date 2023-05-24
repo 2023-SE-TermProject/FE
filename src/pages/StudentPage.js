@@ -2,7 +2,7 @@ import NavigationBar from "../components/NavigationBar";
 import UserInfo from "../components/studentPage/UserInfo";
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Form} from 'react-bootstrap';
 import axios from 'axios';
 import ArtechneVer1 from "../components/studentPage/artechne_ver1";
 import ArtechneVer2 from "../components/studentPage/artechne_ver2";
@@ -171,7 +171,7 @@ const StudentPage = () => {
   const sendScanResult = (result) => {
     // 백엔드로 데이터 전송
     axios
-      .post('http://gcu-metaverse.shop:8080/seats/checkinout', { id: result, userId : localStorage.getItem("id")})
+      .post('http://gcu-metaverse.shop:8080/seats/checkinout', { seatId: result, memberId : localStorage.getItem("id")})
       .then((response) => {
         // 백엔드에서의 처리 결과를 받아옴
         const responseData = response.data;

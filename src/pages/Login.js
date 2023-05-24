@@ -1,8 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
-import { useEffect } from 'react';
-import axios from 'axios';
 
 const Div = styled.div`
 
@@ -35,22 +33,6 @@ const LogoImage = styled.img`
 
 function Login() {
 
-  useEffect(() => {
-    const fetchIpAddress = async () => {
-      try {
-        const response = await axios.get('/json');
-        const ipAddress = response.data.IPv4;
-        localStorage.setItem('ipAddress', ipAddress);
-        console.log('IP 주소가 저장되었습니다:', ipAddress);
-      } catch (error) {
-        console.error('IP 주소를 가져오는 중 오류가 발생했습니다:', error);
-      }
-    };
-
-    fetchIpAddress();
-  }, []);
-
-
   return (
     <Div margin-left="10px">
       <br></br>
@@ -59,7 +41,10 @@ function Login() {
         <Logo> AI공학관 좌석예약 서비스</Logo>
       </LogoContainer>
       <p></p>
-      <Button onClick={() => window.location.href = "http://localhost:8080/oauth2/authorization/google"}>구글 로그인</Button>
+      <Button onClick={() => 
+        window.location.href = "http://3.36.28.64:8080/oauth2/authorization/google" // 배포 환경
+        //window.location.href = "http://localhost:8080/oauth2/authorization/google" // 로컬 환경
+        }>구글 로그인</Button>
     </Div>
   )
 }

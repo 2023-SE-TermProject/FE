@@ -167,11 +167,7 @@ const StudentPage = () => {
         </MobileContainer>
         <MobileContainer>
         <MobileStyledBox>
-            {['2층', '3층'].includes(selectedOption) ? (
             <ArtechneVer1 option={parseInt(selectedOption)} />
-            ) : (
-            <ArtechneVer2 option={parseInt(selectedOption)} />
-            )}
         </MobileStyledBox>
         </MobileContainer>
         <MobileContainer>

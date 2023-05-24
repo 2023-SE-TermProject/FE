@@ -8,7 +8,7 @@ const ArtechneVer2 = ({ option }) => {
   useEffect(() => {
     const fetchSeatStatus = async () => {
       try {
-        const response = await axios.get(`/api/seat-status/${option}`);
+        const response = await axios.get(`http://gcu-metaverse.shop:8080/api/seat-status/${option}`);
         setSeatStatus(response.data);
       } catch (error) {
         console.error(error);

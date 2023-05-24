@@ -13,7 +13,7 @@ const SeatStatus = () => {
 
     useEffect(() => {
       // 백엔드 API 엔드포인트
-      const artechnetUrl = `/members/${id}/seat`;
+      const artechnetUrl = `http://gcu-metaverse.shop:8080/members/${id}/seat`;
   
       // API 요청 보내기
       axios.get(artechnetUrl)

@@ -36,7 +36,7 @@ function LoginAuth (){
 
     async function insertUser(studentId){
         await axios
-            .patch("/members/"+id+"/sign-up",{
+            .patch("http://gcu-metaverse.shop:8080/members/"+id+"/sign-up",{
               studentId : studentId,
             })
             .then((response) => {

@@ -115,7 +115,7 @@ const StudentPage = () => {
   const [selectedOption, setSelectedOption] = useState(2);
 
   const [isReservationClick, setIsReservationClick] = useState(false);
-  const [scanData, setScanData] = useState(null);
+  const [scanData, setScanData] = useState('');
   const [scanSeatId, setScanSeatId] = useState(null);
 
   const handleOptionChange = (event) => {

@@ -135,25 +135,23 @@ const StudentPage = () => {
     });
   
     function success(result) {
-      setScanData(result)
-  
-      getSeatData(result);
-  
-      sendScanResult(scanSeatId);
-  
       scanner.clear();
-      scanner.stop();
+      setScanData(result);
     }
   
     function error(err) {
       console.warn(err);
-  
-      scanner.clear();
-      scanner.stop();
     }
 
     scanner.render(success, error);
   };
+
+  useEffect(() => {
+    getSeatData(scanData);
+
+    sendScanResult(scanSeatId);
+
+  }, [scanData])
 
   const getSeatData = (scanUrl) => {
     axios
@@ -176,6 +174,7 @@ const StudentPage = () => {
   };
 
   const sendScanResult = (result) => {
+
     // 백엔드로 데이터 전송
     axios
       .post('https://gcu-metaverse.shop/api/seats/checkinout', { seatId: result, memberId: localStorage.getItem("id") })

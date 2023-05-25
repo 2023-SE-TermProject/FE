@@ -137,7 +137,6 @@ const StudentPage = () => {
     function success(result) {
       scanner.clear();
       setScanData(result);
-      console.log(result);
     }
   
     function error(err) {
@@ -145,14 +144,11 @@ const StudentPage = () => {
     }
 
     scanner.render(success, error);
-  };
 
-  useEffect(() => {
     getSeatData(scanData);
 
     sendScanResult(scanSeatId);
-
-  }, [scanData])
+  };
 
   const getSeatData = (scanUrl) => {
     axios

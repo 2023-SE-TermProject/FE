@@ -40,7 +40,7 @@ const ArtechneVer2 = ({ option }) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                fontSize: '1vw',
+                fontSize: '2.5vw',
                 gridColumn: `span 1`,
                 color: 'black',
               }}

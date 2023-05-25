@@ -290,7 +290,7 @@ const StudentPage = () => {
             <MobileStyledBox>
               <div>
                 {scanData
-                  ? <div></div>
+                  ? <div>{scanData}</div>
                   : <div id="reader"></div>
                 }
               </div>
@@ -362,7 +362,7 @@ const StudentPage = () => {
             <StyledBox>
               <div>
                 {scanData
-                  ? <div></div>
+                  ? <div>{scanData}</div>
                   : <div id="reader"></div>
                 }
               </div>

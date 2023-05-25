@@ -115,7 +115,8 @@ const StudentPage = () => {
   const [selectedOption, setSelectedOption] = useState(2);
 
   const [isReservationClick, setIsReservationClick] = useState(false);
-  const [scanData, setScanData] = useState("");
+  const [scanData, setScanData] = useState(null);
+  const [scanSeatId, setScanSeatId] = useState(null);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -125,40 +126,37 @@ const StudentPage = () => {
     setIsReservationClick(!isReservationClick);
   }
 
-  useEffect(() => {
-    if (isCheckedIn) {
-      console.log("scan");
-      const scanner = new Html5QrcodeScanner('reader', {
-        qrbox: {
-          width: 250,
-          height: 250,
-        },
-        fps: 5,
-      });
 
-      scanner.render(success, error);
+  const scanner = new Html5QrcodeScanner('reader', {
+    qrbox: {
+      width: 250,
+      height: 250,
+    },
+    fps: 5,
+  });
 
-      function success(result) {
-        setScanData(result)
-        sendScanResult(result);
-      }
+  function success(result) {
+    setScanData(result)
 
-      function error(err) {
-        console.warn(err);
-      }
+    getSeatData(result);
 
-      return () => {
-        scanner.clear();
-        scanner.stop();
-      };
-    }
-    else {
-      setIsCheckedIn(false);
-      console.log("fail"); // isCheckedIn이 false일 경우 "fail"을 출력
-    }
-  }, [isCheckedIn]);
+    sendScanResult(scanSeatId);
+
+    scanner.clear();
+    scanner.stop();
+  }
+
+  function error(err) {
+    console.warn(err);
+
+    scanner.clear();
+    scanner.stop();
+  }
 
   const handleClick = () => {
+
+    scanner.render(success, error);
+
     if (isCheckedIn) {
       setIsCheckedIn(false);
       console.log(isCheckedIn);
@@ -168,6 +166,27 @@ const StudentPage = () => {
       console.log(isCheckedIn);
     }
   };
+
+  const getSeatData = (scanUrl) => {
+    axios
+      .get(scanUrl).then((response) => {
+        if(response.data.id){
+          window.alert("잘못된 QR코드");
+          // eslint-disable-next-line no-restricted-globals
+          location.reload();
+        }
+        else {
+          setScanSeatId(response.data.id);
+        }
+      })
+      .catch((error) => {
+        window.alert("잘못된 QR코드");
+        console.error(error);
+        // eslint-disable-next-line no-restricted-globals
+        location.reload();
+      });
+  };
+
   const sendScanResult = (result) => {
     // 백엔드로 데이터 전송
     axios
@@ -177,9 +196,14 @@ const StudentPage = () => {
         const responseData = response.data;
         window.alert(responseData);
         console.log(responseData);
+        // eslint-disable-next-line no-restricted-globals
+        location.reload();
       })
       .catch((error) => {
+        window.alert("체크인/아웃 실패");
         console.error(error);
+        // eslint-disable-next-line no-restricted-globals
+        location.reload();
       });
   };
   return (
@@ -281,7 +305,7 @@ const StudentPage = () => {
                 onClick={handleClick}
               >
                 <span style={{ whiteSpace: 'nowrap' }}>
-                  {isCheckedIn ? '체크아웃' : '체크인'}
+                  체크인/아웃
                 </span>
               </Button>
             </div>
@@ -353,7 +377,7 @@ const StudentPage = () => {
                 onClick={handleClick}
               >
                 <span style={{ whiteSpace: 'nowrap' }}>
-                  {isCheckedIn ? '체크아웃' : '체크인'}
+                  체크인/아웃
                 </span>
               </Button>
             </div>
@@ -396,7 +420,7 @@ const StudentPage = () => {
       )}
     </>
 
-  )
+  );
 
 }
 

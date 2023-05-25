@@ -11,7 +11,7 @@ const SubmitButton = ({roomId, start, end}) => {
         console.log("startTime : " + start);
         console.log("endTime : " + end);
 
-        const submitUrl = `http://gcu-metaverse.shop:8080/reservations`
+        const submitUrl = `https://gcu-metaverse.shop:8080/reservations`
 
         // API 요청 보내기
         axios.post(submitUrl, {

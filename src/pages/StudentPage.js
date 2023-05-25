@@ -136,8 +136,7 @@ const StudentPage = () => {
   
     function success(result) {
       scanner.clear();
-      setScanData(result);
-      getSeatData(result);
+      sendScanResult(result);
     }
   
     function error(err) {
@@ -145,19 +144,6 @@ const StudentPage = () => {
     }
 
     scanner.render(success, error);
-  };
-
-  const getSeatData = (scanUrl) => {
-    axios
-      .get(scanUrl).then((response) => {
-        sendScanResult(response.data);
-      })
-      .catch((error) => {
-        window.alert("get 실패");
-        console.error(error);
-        // eslint-disable-next-line no-restricted-globals
-        location.reload();
-      });
   };
 
   const sendScanResult = (result) => {

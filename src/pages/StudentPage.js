@@ -154,13 +154,13 @@ const StudentPage = () => {
           sendScanResult(response.data.id);
         }
         else {
-          window.alert("잘못된 QR코드");
+          window.alert("get 실패 : " + response.data);
           // eslint-disable-next-line no-restricted-globals
           location.reload();
         }
       })
       .catch((error) => {
-        window.alert("잘못된 QR코드");
+        window.alert("get 실패 : " + error);
         console.error(error);
         // eslint-disable-next-line no-restricted-globals
         location.reload();
@@ -181,7 +181,7 @@ const StudentPage = () => {
         location.reload();
       })
       .catch((error) => {
-        window.alert("체크인/아웃 실패");
+        window.alert("체크인/아웃 실패" + error);
         console.error(error);
         // eslint-disable-next-line no-restricted-globals
         location.reload();

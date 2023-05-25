@@ -110,8 +110,6 @@ const MobileStyledNotice = styled(StyledNotice)`
 `;
 const StudentPage = () => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-  const [isCheckedIn, setIsCheckedIn] = useState(false);
   const [selectedOption, setSelectedOption] = useState(2);
 
   const [isReservationClick, setIsReservationClick] = useState(false);
@@ -126,45 +124,35 @@ const StudentPage = () => {
     setIsReservationClick(!isReservationClick);
   }
 
-
-  const scanner = new Html5QrcodeScanner('reader', {
-    qrbox: {
-      width: 250,
-      height: 250,
-    },
-    fps: 5,
-  });
-
-  function success(result) {
-    setScanData(result)
-
-    getSeatData(result);
-
-    sendScanResult(scanSeatId);
-
-    scanner.clear();
-    scanner.stop();
-  }
-
-  function error(err) {
-    console.warn(err);
-
-    scanner.clear();
-    scanner.stop();
-  }
-
   const handleClick = () => {
 
-    scanner.render(success, error);
-
-    if (isCheckedIn) {
-      setIsCheckedIn(false);
-      console.log(isCheckedIn);
-    } else {
-      setIsCheckedIn(true);
-      sendScanResult(scanData)
-      console.log(isCheckedIn);
+    const scanner = new Html5QrcodeScanner('reader', {
+      qrbox: {
+        width: 250,
+        height: 250,
+      },
+      fps: 5,
+    });
+  
+    function success(result) {
+      setScanData(result)
+  
+      getSeatData(result);
+  
+      sendScanResult(scanSeatId);
+  
+      scanner.clear();
+      scanner.stop();
     }
+  
+    function error(err) {
+      console.warn(err);
+  
+      scanner.clear();
+      scanner.stop();
+    }
+
+    scanner.render(success, error);
   };
 
   const getSeatData = (scanUrl) => {

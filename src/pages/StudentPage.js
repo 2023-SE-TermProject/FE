@@ -171,12 +171,12 @@ const StudentPage = () => {
     axios
       .get(scanUrl).then((response) => {
         if(response.data.id){
+          setScanSeatId(response.data.id);
+        }
+        else {
           window.alert("잘못된 QR코드");
           // eslint-disable-next-line no-restricted-globals
           location.reload();
-        }
-        else {
-          setScanSeatId(response.data.id);
         }
       })
       .catch((error) => {

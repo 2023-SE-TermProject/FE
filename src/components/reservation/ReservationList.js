@@ -22,7 +22,7 @@ const ReservationList = ({ date, roomId }) => {
         setActiveTime(null);
         setActiveTimeRange(null);
 
-        const reservationTimeUrl = `https://gcu-metaverse.shop:8080/reservations/${roomId}?year=${date.getFullYear()}&month=${(date.getMonth() + parseInt(1))}&date=${date.getDate()}`;
+        const reservationTimeUrl = `https://gcu-metaverse.shop/api/reservations/${roomId}?year=${date.getFullYear()}&month=${(date.getMonth() + parseInt(1))}&date=${date.getDate()}`;
 
         // API 요청 보내기
         axios.get(reservationTimeUrl)
@@ -47,7 +47,7 @@ const ReservationList = ({ date, roomId }) => {
         setActiveTimeRange(null);
         console.log("time change " + time);
 
-        const timeRangeUrl = `https://gcu-metaverse.shop:8080/reservations/${roomId}/valid-time?year=${date.getFullYear()}&month=${(date.getMonth() + parseInt(1))}&date=${date.getDate()}&start=${time}`
+        const timeRangeUrl = `https://gcu-metaverse.shop/api/reservations/${roomId}/valid-time?year=${date.getFullYear()}&month=${(date.getMonth() + parseInt(1))}&date=${date.getDate()}&start=${time}`
 
         // API 요청 보내기
         axios.get(timeRangeUrl)

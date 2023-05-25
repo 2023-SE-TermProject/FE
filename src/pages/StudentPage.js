@@ -137,6 +137,7 @@ const StudentPage = () => {
     function success(result) {
       scanner.clear();
       setScanData(result);
+      getSeatData(result);
     }
   
     function error(err) {
@@ -144,17 +145,13 @@ const StudentPage = () => {
     }
 
     scanner.render(success, error);
-
-    getSeatData(scanData);
-
-    sendScanResult(scanSeatId);
   };
 
   const getSeatData = (scanUrl) => {
     axios
       .get(scanUrl).then((response) => {
         if(response.data.id){
-          setScanSeatId(response.data.id);
+          sendScanResult(response.data.id);
         }
         else {
           window.alert("잘못된 QR코드");

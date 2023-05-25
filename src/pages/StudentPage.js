@@ -251,7 +251,7 @@ const StudentPage = () => {
           <MobileContainer>
             <MobileStyledHeading>아르테크네 좌석 현황 ▼</MobileStyledHeading>
             <div style={{ display: 'flex', alignItems: 'center', gap: 200 }}>
-              <Form.Select value={selectedOption} onChange={handleOptionChange} style={{ width: '20vw' }}>
+              <Form.Select value={selectedOption} onChange={handleOptionChange} style={{ width: '50vw' }}>
                 <option value="">층 선택</option>
                 <option value="2층">2층</option>
                 <option value="3층">3층</option>

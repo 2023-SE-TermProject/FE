@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         '/',
         createProxyMiddleware({
-            target: 'http://gcu-metaverse.shop:8080',
+            target: 'https://gcu-metaverse.shop:8080',
             changeOrigin: true,
         })
     );

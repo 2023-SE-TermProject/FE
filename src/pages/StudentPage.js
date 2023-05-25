@@ -171,7 +171,7 @@ const StudentPage = () => {
   const sendScanResult = (result) => {
     // 백엔드로 데이터 전송
     axios
-      .post('http://gcu-metaverse.shop:8080/seats/checkinout', { seatId: result, memberId: localStorage.getItem("id") })
+      .post('https://gcu-metaverse.shop:8080/seats/checkinout', { seatId: result, memberId: localStorage.getItem("id") })
       .then((response) => {
         // 백엔드에서의 처리 결과를 받아옴
         const responseData = response.data;

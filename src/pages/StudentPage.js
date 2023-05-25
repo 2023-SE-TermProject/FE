@@ -150,14 +150,7 @@ const StudentPage = () => {
   const getSeatData = (scanUrl) => {
     axios
       .get(scanUrl).then((response) => {
-        if(response.data.id){
-          sendScanResult(response.data.id);
-        }
-        else {
-          window.alert("get 실패 : " + response.data);
-          // eslint-disable-next-line no-restricted-globals
-          location.reload();
-        }
+        sendScanResult(response.data);
       })
       .catch((error) => {
         window.alert("get 실패 : " + error);

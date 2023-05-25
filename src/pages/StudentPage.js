@@ -137,6 +137,7 @@ const StudentPage = () => {
     function success(result) {
       scanner.clear();
       setScanData(result);
+      console.log(result);
     }
   
     function error(err) {

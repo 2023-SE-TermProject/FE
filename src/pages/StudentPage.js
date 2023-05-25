@@ -153,7 +153,7 @@ const StudentPage = () => {
         sendScanResult(response.data);
       })
       .catch((error) => {
-        window.alert("get 실패 : " + error);
+        window.alert("get 실패");
         console.error(error);
         // eslint-disable-next-line no-restricted-globals
         location.reload();

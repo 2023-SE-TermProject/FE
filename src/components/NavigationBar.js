@@ -2,6 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+{/*
+This is the navigation bar of the website, which includes a logo and a logout button.
+*/}
+
 const NavbarContainer = styled.nav`
   display: flex;
   align-items: center;

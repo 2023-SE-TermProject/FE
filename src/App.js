@@ -11,11 +11,13 @@ function App() {
   return (
     <Router>
       <div>
+        {/* The Routes component is used to define the routes for different pages. */}
         <Routes>
+          {/* The Route component defines a specific route and its corresponding element. */}
+          {/* ex. When the path matches "/login", the Login component will be rendered. */}
           <Route path="/login" element={<Login />} />
           <Route path="/loginauth" element={<LoginAuth />} />
           <Route path="/studentpage" element={<StudentPage />} />
-          {/* 임시 */}
           <Route path="/adminpage" element={<AdminPage />} />
         </Routes>
       </div>

@@ -3,7 +3,10 @@ import axios from "../../hooks/axios";
 import TimeBlock from "./TimeBlock";
 import styled, { css } from "styled-components";
 import SubmitButton from "./SubmitButton";
-
+{/*
+When the user clicks on the desired meeting room number for reservation,
+this code fetches the reservation status of that particular meeting room and informs the available time slots for reservation.
+*/}
 const ReservationList = ({ date, roomId }) => {
 
     const [reservationTimeList, setReservationTimeList] = useState(null);
@@ -27,14 +30,12 @@ const ReservationList = ({ date, roomId }) => {
         // API 요청 보내기
         axios.get(reservationTimeUrl)
             .then(response => {
-                // API 요청이 성공하면 받아온 데이터를 상태에 저장
                 console.log(response.data);
                 setReservationTimeList(response.data);
                 console.log("time list : ");
                 console.log(reservationTimeList);
             })
             .catch(error => {
-                // API 요청이 실패하면 에러 처리
                 console.error('Error fetching reservation data:', error);
             });
     }, [date, roomId]);
@@ -48,22 +49,19 @@ const ReservationList = ({ date, roomId }) => {
         console.log("time change " + time);
 
         const timeRangeUrl = `https://gcu-metaverse.shop/api/reservations/${roomId}/valid-time?year=${date.getFullYear()}&month=${(date.getMonth() + parseInt(1))}&date=${date.getDate()}&start=${time}`
-
-        // API 요청 보내기
         axios.get(timeRangeUrl)
             .then(response => {
-                // API 요청이 성공하면 받아온 데이터를 상태에 저장
+                // Upon successful API request, store the retrieved data in the state.
                 console.log(response.data);
                 setReservationTimeRangeList(response.data);
                 console.log(reservationTimeRangeList);
             })
             .catch(error => {
-                // API 요청이 실패하면 에러 처리
                 console.error('Error fetching reservation data:', error);
             });
 
     }
-
+    // This code calculates the start time and end time based on the user's click.
     function onTimeRangeBtnClick(time) {
         setEndTime((parseInt(startTime) + parseInt(time)));
         setActiveTimeRange(time);
@@ -71,8 +69,7 @@ const ReservationList = ({ date, roomId }) => {
 
     }
 
-
-
+    // When the user selects the start time and end time and clicks the "Book Now" button, it is connected to the SubmitButton component.
     return (
         <>
             <b>예약 시작 가능 시간</b>            

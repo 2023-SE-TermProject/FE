@@ -1,7 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
-
+{/*
+This code constructs the UI for the login page and provides a button for Google login.
+ The login is only possible with a Gachon University Google account.
+ If you are not affiliated with Gachon University, login is restricted.
+*/}
+ 
+// This code defines a styled component called "StyledBox" that represents a styled <div> element.
 const Div = styled.div`
 
 margin: 1em;

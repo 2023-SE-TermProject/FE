@@ -1,9 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styled from 'styled-components';
 import axios from "../hooks/axios";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-
+{/*
+This code determines whether it is the user's initial login when they log in.
+After successful login, it stores the user's information in the local storage.
+*/}
 function LoginAuth (){
     const [searchParams, setSearchParams]= useSearchParams();
     const role = searchParams.get('role');
@@ -23,6 +25,7 @@ function LoginAuth (){
             navigate("/studentpage");
         }
         else if (role === "guest"){
+          // This code prompts the user to enter their student ID during the initial login.
             const unregisteredStudentID = window.prompt("최초 로그인 입니다. 학번을 입력하세요.");
             if (unregisteredStudentID) {
                 const studentId = unregisteredStudentID.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
@@ -33,7 +36,7 @@ function LoginAuth (){
       }
       redirect();
     }, []);
-
+    // This code sends the entered student ID to the backend server.
     async function insertUser(studentId){
         await axios
             .patch("https://gcu-metaverse.shop/api/members/"+id+"/sign-up",{
@@ -51,7 +54,7 @@ function LoginAuth (){
       }
 
     const storeUserInfo = (token, id) => {
-        // 토큰 값과 id 로컬 스토리지에 저장
+        // saves the token value and ID in the local storage.
         localStorage.setItem('token', token);
         localStorage.setItem("id", id);
         console.log(id);

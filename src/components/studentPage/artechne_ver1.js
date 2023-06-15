@@ -2,10 +2,13 @@ import ".//styles/seatStyle1.css"
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
-
+{/*
+ArtechneVer1.js is the code that represents the seat status in Artecnne on floors 3, 4, 5, and 7.
+If a seat is available, it is represented by a white-colored square, and if it is unavailable, it is represented by a gray-colored square. 
+*/}
 const ArtechneVer1 = ({ option }) => {
   const [seatStatus, setSeatStatus] = useState(null);
-
+  // The backend retrieves the seat status information.
   useEffect(() => {
     const fetchSeatStatus = async () => {
       try {
@@ -22,7 +25,6 @@ const ArtechneVer1 = ({ option }) => {
 
   return (
     <div>
-      {/* 바로 아래 코드는 임시로 넣어놨습니다. */}
       <div>
         <b>{option}층</b>
       </div>

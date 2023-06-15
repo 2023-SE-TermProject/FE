@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
-
+{/*
+Set the color of the clicked time button and the color of the other buttons.
+*/}
 const TimeBlock = ({time, onClick, isActive}) => {
 
     return (

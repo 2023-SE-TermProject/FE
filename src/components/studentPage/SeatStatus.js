@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+{/*
+This code displays the reservation status for the user.
+It allows users to view the reservation status for Artecnne. 
+*/}
+
 const StyledHeading = styled.h3`
   font-size: 1.5rem;
   font-weight: bold;
@@ -12,24 +17,21 @@ const SeatStatus = () => {
     const id = localStorage.getItem("id");
 
     useEffect(() => {
-      // 백엔드 API 엔드포인트
+      // This code sends the user ID to the backend server to retrieve the user's checkIn history.
       const artechnetUrl = `https://gcu-metaverse.shop/api/members/${id}/seat`;
-  
-      // API 요청 보내기
       axios.get(artechnetUrl)
         .then(response => {
-          // API 요청이 성공하면 받아온 데이터를 상태에 저장
+          // Upon successful API request, this code stores the received data in the state.
           setArtechnetData(response.data);
           console.log(artechnetData);
         })
         .catch(error => {
-          // API 요청이 실패하면 에러 처리
           console.error('Error fetching reservation data:', error);
         });
     }, [id]);       
   
     if (!artechnetData) {
-      // 데이터가 아직 로딩 중인 경우 로딩 상태를 표시할 수 있습니다.
+      // If the data is still being loaded, the loading state is displayed.
       return <div>Loading...</div>;
     }
     if (artechnetData.seatNumber === null){

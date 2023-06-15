@@ -8,6 +8,12 @@ import ArtechneVer1 from "../components/studentPage/artechne_ver1";
 import ArtechneVer2 from "../components/studentPage/artechne_ver2";
 import Reservation from "../components/reservation/Reservation";
 import { Html5QrcodeScanner } from "html5-qrcode";
+{/*
+StudentPage.js is the code that defines and composes the components necessary for the student page.
+It includes the required styled component and utilizes various components to construct the page.
+*/}
+
+// This code defines a styled component called "StyledBox" that represents a styled <div> element.
 const StyledBox = styled.div`
   text-align: center;
   background-color: white;
@@ -109,21 +115,21 @@ const MobileStyledNotice = styled(StyledNotice)`
   font-size: 0.8rem;
 `;
 const StudentPage = () => {
+  // This code determines whether the user accessed the program using a mobile device. It is used to adjust the size accordingly.
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  const [selectedOption, setSelectedOption] = useState(2);
 
+  const [selectedOption, setSelectedOption] = useState(2);
   const [isReservationClick, setIsReservationClick] = useState(false);
   const [scanData, setScanData] = useState('');
-  const [scanSeatId, setScanSeatId] = useState(null);
 
+  // This code executes when the user selects a floor in Artecnne.
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    // 선택된 옵션에 대한 추가적인 처리 수행
   };
   const onReservationBtnClick = () => {
     setIsReservationClick(!isReservationClick);
   }
-
+  // This is the code for QR code recognition using Html5QrcodeScanner.
   const handleClick = () => {
 
     const scanner = new Html5QrcodeScanner('reader', {
@@ -145,14 +151,11 @@ const StudentPage = () => {
 
     scanner.render(success, error);
   };
-
+  // This is the code that sends the information of the scanned QR to the backend.
   const sendScanResult = (result) => {
-
-    // 백엔드로 데이터 전송
     axios
       .post('https://gcu-metaverse.shop/api/seats/checkinout', { seatId: result, memberId: localStorage.getItem("id") })
       .then((response) => {
-        // 백엔드에서의 처리 결과를 받아옴
         const responseData = response.data;
         window.alert(responseData);
         console.log(responseData);
@@ -167,69 +170,7 @@ const StudentPage = () => {
       });
   };
   return (
-    // <>
-    // <NavigationBar />
-    // <MobileContainer>
-    // <MobileStyledBox>
-    //     <MobileStyledNotice>[공지] 05월 29일 00시~2시(약 2시간) 좌석 예약 서비스 점검</MobileStyledNotice>
-    // </MobileStyledBox>
-    // </MobileContainer>
-    // <br />
-    // <MobileContainer>
-    // <MobileStyledBox>
-    //     <StyleFont>
-    //     <UserInfo />
-    //     </StyleFont>
-    // </MobileStyledBox>
-    // </MobileContainer>
-    // <br />
-    // <MobileContainer>
-    // <MobileStyledHeading>아르테크네 좌석 현황 ▼</MobileStyledHeading>
-    // <div style={{ display: 'flex', alignItems: 'center', gap: 200}}>
-    //     <Form.Select value={selectedOption} onChange={handleOptionChange}>
-    //     <option value="">층 선택</option>
-    //     <option value="2">2층</option>
-    //     <option value="3">3층</option>
-    //     <option value="4">4층</option>
-    //     <option value="5">5층</option>
-    //     <option value="7">7층</option>
-    //     </Form.Select>
-    //     <Button
-    //     variant="light"
-    //     className="border border-primary border-2 fw-bold"
-    //     onClick={handleClick}
-    //     >
-    //     <span style={{ whiteSpace: 'nowrap' }}>
-    //         {isCheckedIn ? '체크아웃' : '체크인'}
-    //     </span>
-    //     </Button>
-    // </div>
-    // </MobileContainer>
-    // <MobileContainer>
-    // <MobileStyledBox>
-    //     <ArtechneVer1 option={parseInt(selectedOption)} />
-    // </MobileStyledBox>
-    // </MobileContainer>
-    // <MobileContainer>
-    // <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-    //     <Container>
-    //     <StyledUseBox />
-    //     <StyledText>이용불가</StyledText>
-    //     <StyledOpeningBox />
-    //     <StyledText>이용가능</StyledText>
-    //     </Container>
-    // </div>
-    // </MobileContainer>
-    // <br />
-    // <MobileContainer>
-    // <MobileStyledHeading onClick={onReservationBtnClick}>
-    //     메타버스 회의실 예약 ▼
-    // </MobileStyledHeading>
-    // <MobileStyledBox>
-    //     <Reservation />
-    // </MobileStyledBox>
-    // </MobileContainer>
-    // </>
+    // We created a branching logic to adjust the styles based on the screen size for mobile devices.
     <>
       <NavigationBar />
       {isMobile ? (

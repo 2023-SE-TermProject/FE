@@ -5,6 +5,10 @@ import moment from "moment/moment";
 import axios from "../../hooks/axios";
 import Select from "react-select";
 import ReservationList from "./ReservationList";
+{/*
+This code displays a calendar for Metaverse meeting room reservations. 
+When a date is clicked, it shows the available meeting rooms for that day.
+*/}
 
 const Reservation = () => {
   const [selectDate, setSelectDate] = useState(new Date());
@@ -14,10 +18,9 @@ const Reservation = () => {
   useEffect(() => {
     const requestUrl = `https://gcu-metaverse.shop/api/reservations/room-list`;
 
-    // API 요청 보내기
     axios.get(requestUrl)
       .then(response => {
-        // API 요청이 성공하면 받아온 데이터를 상태에 저장
+        // Upon successful API request, store the received data in the state.
         const rooms = response.data.map((room) => ({
           value: room.id,
           label: room.roomNumber.toString()
@@ -28,19 +31,18 @@ const Reservation = () => {
         console.log(roomList);
       })
       .catch(error => {
-        // API 요청이 실패하면 에러 처리
         console.error('Error fetching reservation data:', error);
       });
   }, [])
 
   return (
     <div>
-      <Calendar onChange={setSelectDate} // useState로 포커스 변경 시 현재 날짜 받아오기
-        formatDay={(locale, date) => moment(date).format("DD")} // 날'일' 제외하고 숫자만 보이도록 설정
+      <Calendar onChange={setSelectDate} // Using useState, receive the current date when the focus changes.
+        formatDay={(locale, date) => moment(date).format("DD")} // Configure to display only the numbers, excluding the day part.
         value={selectDate}
         navigationLabel={null}
-        minDate={new Date()} // 오늘 이후로만 선택 가능
-        showNeighboringMonth={false} //  이전, 이후 달의 날짜는 보이지 않도록 설정
+        minDate={new Date()} // Selectable only for dates after today.
+        showNeighboringMonth={false} // Configure to hide the dates of previous and future months.
         className="mx-auto w-full text-sm border-b"
       />
       <br />

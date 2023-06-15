@@ -1,6 +1,9 @@
 import axios from "../../hooks/axios";
 import styled, { css } from "styled-components";
-
+{/*
+The user sends the selected reservation time and meeting room to the backend to check the success of the reservation,
+and then displays the reservation status to the user.
+*/}
 const SubmitButton = ({roomId, start, end}) => {
     
     function onSubmitBtnClick() {
@@ -13,7 +16,7 @@ const SubmitButton = ({roomId, start, end}) => {
 
         const submitUrl = `https://gcu-metaverse.shop/api/reservations`
 
-        // API 요청 보내기
+        // Send the reservation information to the backend.
         axios.post(submitUrl, {
           memberIdx : localStorage.getItem("id"),
           meetingRoomIdx : roomId,
@@ -21,14 +24,14 @@ const SubmitButton = ({roomId, start, end}) => {
           end : end
         })
             .then(response => {
-                // API 요청이 성공하면 받아온 데이터를 상태에 저장
+                // Upon a successful API request, store the retrieved data in the state.
                 console.log(response.data);
                 window.alert("예약 신청 성공!");
                 // eslint-disable-next-line no-restricted-globals
                 location.reload();
             })
             .catch(error => {
-                // API 요청이 실패하면 에러 처리
+                // If the API request fails, handle the error.
                 console.error('Error fetching reservation data:', error);
                 window.alert("예약 신청 실패!");
                 // eslint-disable-next-line no-restricted-globals
